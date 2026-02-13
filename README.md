@@ -1,176 +1,244 @@
-# 🛒 Fake Discount Detector — End-to-End ML + Analytics System
+# Amazon Fake Discount Detection System
 
-## Overview
-
-Many e-commerce platforms show misleading discounts by artificially inflating the MRP and then applying a large percentage off.
-This project detects whether a product discount is **genuine or manipulated** using data analytics and machine learning.
-
-The system analyzes pricing behavior, identifies abnormal discount patterns, trains a fraud detection model, and deploys an interactive dashboard where users can verify deals in real time.
+End‑to‑end Machine Learning + Analytics project that detects suspicious pricing on e‑commerce products and visualizes risk patterns through an interactive Power BI dashboard.
 
 ---
 
-## Problem Statement
+## Project Overview
 
-Customers often trust discounts without realizing:
+Online marketplaces often show inflated MRPs to create the illusion of large discounts. This project builds a **rule‑assisted ML fraud detection system** to identify such fake discounts and present insights through a professional analytics dashboard.
 
-* The MRP was increased before sale
-* The discount percentage is unrealistic
-* Reviews do not match pricing behavior
+The system:
 
-This leads to poor buying decisions.
-
-The goal is to build a system that answers:
-
-> **Is this discount real or fake?**
+1. Cleans and analyzes 1.4M Amazon product listings
+2. Engineers fraud indicators from pricing behaviour
+3. Trains a classification model to detect suspicious deals
+4. Saves a deployable model (.pkl)
+5. Serves predictions via a Python app
+6. Visualizes results in a Power BI business dashboard
 
 ---
 
-## Solution
+## Key Features
 
-The project builds a complete pipeline:
+### Machine Learning
 
-Dataset → Data Cleaning → Pricing Analysis → Fraud Rules → ML Model → Explainability → Live Dashboard
+* Fake discount detection model
+* Handles highly imbalanced fraud data
+* Feature importance analysis
+* Deployable model (.pkl)
 
-The system generates a prediction based on pricing mismatch and trust signals.
+### Analytics
+
+* Discount distribution analysis
+* Category‑wise fraud patterns
+* Bestseller fraud tracking
+* Risk scoring system
+
+### Dashboard (Power BI)
+
+* KPI cards (Total products, Avg discount, Fake rate)
+* Deal authenticity distribution
+* Top categories with fake discounts
+* Category filter slicer
+* Dynamic risk level indicator
+
+### Deployment Ready
+
+* Trained model saved
+* Predictive app (app.py)
+* Clean structured repository
 
 ---
 
 ## Dataset
 
-Amazon Products Dataset (sampled ~100k records)
+Source: Amazon Products Dataset (Kaggle)
 
-Key features used:
+Used tables:
 
-* Price
-* List Price (MRP)
-* Rating
-* Number of Reviews
+* `amazon_products` – product pricing & reviews
+* `amazon_categories` – category mapping
 
-Derived feature:
+Key columns used:
 
-* Discount Percentage
+* price
+* listPrice (MRP)
+* stars
+* reviews
+* boughtInLastMonth
+* category_id
 
 ---
 
-## Fraud Logic (Human Behaviour Based)
+## Fraud Logic
 
-Products are considered suspicious if:
+A product is considered suspicious when:
 
 * Price > MRP (negative discount)
-* Extremely large discount (>80%)
-* Pricing inconsistent with trust signals
+* Extremely high discount (>80%)
+* Abnormal price behaviour relative to rating & reviews
+
+The ML model learns patterns beyond simple rule detection.
 
 ---
 
-## Machine Learning Model
+## Machine Learning Pipeline
 
-### Challenge
+1. Data Cleaning
+2. Feature Engineering
+3. Label Creation (rule assisted)
+4. Train/Test Split
+5. Model Training
+6. Evaluation (Precision/Recall focused)
+7. Save Model
 
-The dataset had extreme class imbalance:
-
-> Fake deals ≈ 0.1% of data
-
-Accuracy becomes meaningless in such cases.
-
-### Approach
-
-* Created fraud labels based on abnormal pricing behaviour
-* Used **SMOTE** to balance rare fraud cases
-* Trained **Random Forest Classifier**
-* Evaluated using precision & recall instead of accuracy
-
-### Result
-
-The model successfully detects fraudulent discounts while maintaining low false alarms.
-
----
-
-## Model Explainability
-
-Feature importance analysis shows:
-
-1. Price vs MRP mismatch is the strongest fraud indicator
-2. Ratings help validate trust
-3. Review count has minimal impact
-
-This confirms real-world shopping behavior patterns.
-
----
-
-## Live AI Dashboard
-
-An interactive Streamlit application allows users to test any deal.
-
-User inputs:
-
-* Current price
-* MRP
-* Rating
-* Reviews
-
-The model predicts:
-
-> Genuine Deal ✅
-> Fake Discount 🚨
-
-This converts the project from analysis → usable product.
-
----
-
-## Tech Stack
-
-Python
-Pandas & NumPy
-Scikit-Learn
-Imbalanced-Learn (SMOTE)
-Matplotlib
-Streamlit
-Git & GitHub
-
----
-
-## How to Run Locally
-
-Clone repository
+Model Output:
 
 ```
-git clone https://github.com/MrInfinityboss/fake-discount-detector.git
-cd fake-discount-detector/dashboard
+fake_discount_model.pkl
 ```
 
-Install dependencies
+---
+
+## Dashboard Metrics
+
+| Metric                   | Description                     |
+| ------------------------ | ------------------------------- |
+| Total Products Analyzed  | Dataset coverage                |
+| Average Discount Offered | Market discount behaviour       |
+| Fake Discount %          | Fraud rate                      |
+| Fake on Bestseller       | High‑risk manipulation          |
+| Risk Level               | Overall marketplace trust score |
+
+Risk Levels:
+
+* LOW RISK
+* MEDIUM RISK
+* HIGH RISK
+
+---
+
+## Running the Project
+
+### 1. Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-Run dashboard
+### 2. Run notebook
 
 ```
-streamlit run app.py
+notebooks/analysis.ipynb
+```
+
+### 3. Launch prediction app
+
+```
+python dashboard/app.py
+```
+
+### 4. Open dashboard
+
+Open:
+
+```
+dashboard/fake_discount_dashboard.pbix
+```
+
+Refresh data if needed.
+
+---
+
+## Project Structure
+
+```
+fake-discount-detector/
+│
+├── data/ (ignored)
+├── notebooks/
+│   └── analysis.ipynb
+│
+├── dashboard/
+│   ├── fake_discount_dashboard.pbix
+│   ├── powerbi_data.csv
+│   ├── fake_discount_model.pkl
+│   └── app.py
+│
+├── src/ (future API)
+├── requirements.txt
+├── README.md
+└── .gitignore
 ```
 
 ---
 
-## Key Learnings
+## Skills Demonstrated
 
-* Fraud detection requires recall optimization, not accuracy
-* Class imbalance can mislead ML models
-* Explainability is essential for trust
-* Data analytics + ML + UI creates real-world impact
+* Data Cleaning & Feature Engineering
+* Imbalanced Classification
+* Model Evaluation
+* Model Serialization
+* Business Intelligence (Power BI)
+* Data Storytelling
+* End‑to‑End ML Workflow
 
 ---
 
 ## Future Improvements
 
-* Price history tracking
-* Browser extension for online shopping
-* Deep learning anomaly detection
-* Real-time API integration
+* Real‑time API prediction service
+* Web dashboard deployment (Streamlit)
+* Time‑series price tracking
+* Seller fraud scoring
 
 ---
 
 ## Author
 
-Akshat
-Data Analytics & Machine Learning Project
+Akshat Porwal
+
+Data Analyst / ML Enthusiast
+
+---
+
+This project demonstrates a complete analytics + ML pipeline suitable for fraud detection use‑cases in e‑commerce marketplaces.
+
+---
+
+## 📊 Power BI Dashboard Preview
+
+> Place your screenshot inside `assets/powerbi_dashboard.png`
+
+![Power BI Dashboard](assets/powerbi_dashboard.png)
+
+This dashboard provides business‑level insights including:
+
+* Fake vs Genuine deal distribution
+* Top categories with suspicious discounts
+* Average discount analysis
+* Bestseller manipulation detection
+* Risk level indicator (Low / Medium / High)
+
+---
+
+## 🌐 Web App (Model Inference UI)
+
+> Place your screenshot inside `assets/app_dashboard.png`
+
+![App Dashboard](assets/app_dashboard.png)
+
+The web interface allows users to:
+
+* Enter product details
+* Predict whether a discount is fake or genuine
+* Instantly view risk classification
+* Simulate real e‑commerce fraud detection
+
+
+assets/
+ ├── powerbi_dashboard.png
+```
+
+GitHub automatically renders them in README.

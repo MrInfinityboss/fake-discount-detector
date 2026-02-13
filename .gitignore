@@ -1,3 +1,14 @@
-data/
+data/*
 *.csv
+!dashboard/powerbi_data.csv
 .ipynb_checkpoints/
+__pycache__/
+# datasets
+data/*
+*.xlsx
+*.csv
+!dashboard/powerbi_data.csv
+
+# temp
+*.log
+*.tmp
