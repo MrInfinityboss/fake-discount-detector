@@ -223,20 +223,6 @@ This dashboard provides business‑level insights including:
 
 ---
 
-## 🌐 Web App (Model Inference UI)
-
-> Place your screenshot inside `assets/app_dashboard.png`
-
-![App Dashboard](assets/app_dashboard.png)
-
-The web interface allows users to:
-
-* Enter product details
-* Predict whether a discount is fake or genuine
-* Instantly view risk classification
-* Simulate real e‑commerce fraud detection
-
-
 assets/
  ├── powerbi_dashboard.png
 ```
