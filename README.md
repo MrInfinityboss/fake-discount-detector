@@ -1,52 +1,63 @@
 # 🛒 Fake Discount Detector
 
-Detects whether an e-commerce discount is genuine or manipulated using real product pricing data.
+A data analytics project that detects whether online shopping discounts are genuine or manipulated.
 
 ---
 
-## Problem
+## The Problem
 
-Many online stores artificially increase the MRP and then show large discounts.
-This misleads customers into believing they are getting a deal.
+E-commerce platforms often increase the MRP before sales and then show huge discounts.
+Customers believe they are saving money — but many deals are fake.
 
 ---
 
-## Solution
+## The Solution
 
-This project analyzes product pricing data and calculates a **Deal Authenticity Score (0–100)** based on:
+This project analyzes real Amazon product pricing data and calculates a **Deal Authenticity Score (0–100)** using:
 
-* Actual price vs listed price
 * Discount percentage anomalies
+* Price vs original MRP validation
 * Product rating reliability
-* Review count trustworthiness
+* Review count trust factor
 
 ---
 
-## Features
+## Example — Discount Distribution
+
+![Discount Graph](assets/graph.png)
+
+---
+
+## Fake Deals Detected
+
+![Fake Products](assets/fake_products.png)
+
+---
+
+## Best Genuine Deals
+
+![Best Deals](assets/best_deals.png)
+
+---
+
+## Key Features
 
 * Detect fake pricing (price > MRP)
-* Detect suspicious high discounts (>80%)
-* Generate authenticity score for each product
-* Identify best genuine deals
-* Identify scam-like products
+* Identify suspicious discounts (>80%)
+* Rank trustworthy deals using scoring algorithm
+* Reveal scam-like listings automatically
 
 ---
 
 ## Tech Stack
 
-Python, Pandas, NumPy, Matplotlib, Seaborn
-
----
-
-## Example Output
-
-Top genuine deals and suspicious products are automatically identified using the scoring algorithm.
+Python • Pandas • NumPy • Matplotlib • Seaborn • Git
 
 ---
 
 ## Future Improvements
 
-* Machine learning classification model
-* Brand-level trust ranking
+* Machine learning classification
+* Brand trust ranking
 * Price history tracking
-* Power BI dashboard
+* Interactive dashboard
